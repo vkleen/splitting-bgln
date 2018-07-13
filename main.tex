@@ -14,15 +14,78 @@
 
 \section{Introduction}
 
-\begin{theorem}
-    Over a field \(k\), there is a \(\PP^1\)--stable splitting \(\Sigma^\infty_{\PP^1}\BGL_n \simeq \bigvee_{i=0}^{n-1} \Sigma^\infty_{\PP^1}\MGL_i\).
+\begin{theorem}\label{thm:main}
+    Over a field \(k\), there is a \(\PP^1\)--stable splitting \(\Tsusp
+    \BGL_{n,+} \simeq \bigvee_{i=0}^{n-1} \Tsusp \MGL_j\).
 \end{theorem}
 
-\section{Becker-Gottlieb Transfers in Motivic Homotopy Theory}
+\section{Becker--Gottlieb Transfers in Motivic Homotopy Theory}
+
+\begin{theorem}
+    Suppose \(S\) is a scheme and \(f \colon X \to S\) is smooth and proper. Then
+    there is a natural \(\PP^1\)--stable map \(\transfer[f]\colon
+    \one{S}\to\Tsusp X_+\) in \(\SH(S)\).
+\end{theorem}
 
 \section{Double Coset Formulas}
 
 \section{Proof of the Theorem}
+
+The inclusions \(\GL_i\to\GL_n\) induce a filtration
+\[
+    \BGL_{0,+}\to[i_1] \BGL_{1,+} \to[i_2] \dots \to[i_n] \BGL_{n,+} \to
+    \dots\to[i_m] \BGL_{m,+}.
+\]
+For \(k \leq n\) the block--diagonal inclusion \(i_{k,n}\colon\BGL_k\times\BGL_{n-k}\to \BGL_n\) has
+homotopy fibers \(\GL_n/{\GL_k\times\GL_{n-k}}\). This homogeneous space is
+\(\AA^1\)--homotopy equivalent to the Grassmannian \(\Gr[n]{k}\) of \(k\)--planes
+in \(n\)--space which is smooth and proper. Consequently, \(i_{k,n}\) admits a
+Becker--Gottlieb transfer \(\transfer[n,k]\colon\BGL_{n,+}\to \BGL_{k,+}\smashp
+\BGL_{n-k,+}\). Write \(f_{n,k}\colon \BGL_{n,+}\to \BGL_{k,+}\) for the
+composition
+\[
+  \BGL_{n,+} \to[{\transfer[n,k]}] \BGL_{k,+}\smashp\BGL_{n-k,+} \to[\proj] \BGL_{k,+}
+\]
+and \(\phi_{n,k}\) for the composition
+\[
+  \BGL_{n,+}\to[f_{n,k}] \BGL_{k,+}\to\BGL_k/{\BGL_{k-1}}.
+\]
+
+\begin{lemma}\label{lem:phi-comp}
+  With notation as above, for \(k < n\) the compositions
+\[
+  \BGL_{n-1,+} \to[i_n] \BGL_{n,+} \to[f_{n,k}] \BGL_{k,+} \to \BGL_k/{\BGL_{k-1}}
+\]
+and
+\[
+  \BGL_{n-1,+} \to[f_{n-1,k}] \BGL_{k,+} \to \BGL_k/{\BGL_{k-1}}
+\]
+coincide.
+\end{lemma}
+
+\begin{proof}[{Proof of \autoref{thm:main}}]
+  Proceeding by induction on \(n\), assume that
+\[
+  \Phi = \bigvee_{k=0}^{n-1} \phi_{n-1,k}\colon \BGL_{n-1,+} \to \bigvee_{k=0}^{n-1} \BGL_k/{\BGL_{k-1}}
+\]
+is a \(\PP^1\)--stable equivalence. Because of \autoref{lem:phi-comp} we have a
+commutative diagram
+\[
+  \begin{tikzcd}
+    {} & \BGL_{n,+}\ar[dr, "\Phi'"] & {} \\
+    \BGL_{n-1,+} \ar[rr, "\Phi"'] \ar[ur, "i_n"] & {} & \displaystyle\bigvee_{k=0}^{n-1}\BGL_k/{\BGL_{k-1}}
+  \end{tikzcd}
+\]
+where \(\Phi' = \bigvee_{k=0}^{n-1}\phi_{n,k}\). It follows that \(\Phi^{-1}\circ\Phi'\circ i_n \simeq \id\),
+\ie~\(i_n\) admits a left inverse. This implies that we have a \(\PP^1\)--stable equivalence
+\[
+  \BGL_{n,+} \to[{(\Phi^{-1}\Phi') \vee \phi_{n,n}}] \BGL_{n-1,+} \vee \BGL_n/{\BGL_{n-1}}
+\]
+since \(\phi_{n,n}\) is by definition the canonical projection. Postcomposing
+with \(\Phi\) then shows that the stable map \(\Phi'\vee\phi_{n,n}\colon
+\BGL_{n,+}\to\bigvee_{k=0}^n \BGL_k/{\BGL_{k-1}}\) is a \(\PP^1\)--stable
+equivalence as well.
+\end{proof}
 
 \printbibliography
 
