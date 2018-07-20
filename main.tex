@@ -27,7 +27,45 @@
     \one{S}\to\Tsusp X_+\) in \(\SH(S)\).
 \end{theorem}
 
-\section{Double Coset Formulas}
+\begin{lemma}\viktor{maybe it would be better to formulate additivity for
+    distinguished triangles after May first}
+  Suppose \(X = U\cup V\) for \(U,V\) Zariski--open in \(X\). Let
+  \(\transfer[U]\colon \one{}\to U_+\) and \(\transfer[V]\colon \one{}\to V_+\)
+  be the Becker--Gottlieb transfers for \(U\) and \(V\) respectively. Then there
+  is a Mayer--Vietoris type decomposition for the transfer
+  \(\transfer[X]\colon\one{}\to X_+\), namely
+  \[
+    \transfer[X] = i_{U,+}\circ\transfer[U] + i_{V,+}\circ\transfer[V] -
+    i_{U\cap V,+}\circ\transfer[U\cap V]
+  \]
+  where \(i_U\), \(i_V\) and \(i_{U\cap V}\) are the evident inclusions and
+  \(\transfer[U\cap V]\colon\one{}\to (U\cap V)_+\) is the Becker--Gottlieb
+  transfer for \(U\cap V\).
+\end{lemma}
+
+\section{Equivariant Transfers of Grassmannians}
+
+\begin{lemma}\label{lem:grassmann-decomp}
+  Suppose \(k<n\). The open complement of the closed immersion
+  \(\Gr[n-1]{k-1}\clim \Gr[n]{k}\) is the total space of a vector bundle of rank
+  \(k\) over \(\Gr[n-1]{k}\).
+
+  Dually, the open complement of \(\Gr[n-1]{k}\clim \Gr[n]{k}\) is the total
+  space of a vector bundle of rank \(n-k\) over \(\Gr[n-1]{k-1}\).
+\end{lemma}
+
+\begin{lemma}
+  Suppose \(k < n\) and let \(\transfer[n,k]\colon \one{} \to \Gr[n]{k}_+\)
+  denote the Becker--Gottlieb transfer for \(\Gr[n]{k}\) in \(\SH^{\GL_{n-1}}\).
+  Write \(i_{k-1}\colon \Gr[n-1]{k-1}\clim \Gr[n]{k}\)  and \(i_k\colon
+  \Gr[n-1]{k}\clim \Gr[n]{k}\) for the inclusions\viktor{which inclusions
+    exactly?}. Then
+  \begin{align*}
+    \transfer[n,k] &= i_{k-1,+}\circ\transfer[n-1,k-1] + (1 + \chi) i_{k,+}\circ\transfer[n,k-1] =\\
+                   &= (1 + \chi')i_{k-1,+}\circ\transfer[n-1,k-1] + i_{k,+}\circ\transfer[n,k-1]
+  \end{align*}
+  \viktor{what's \(\chi\) and \(\chi'\)?}
+\end{lemma}
 
 \section{Proof of the Theorem}
 
@@ -82,7 +120,7 @@ where \(\Phi' = \bigvee_{k=0}^{n-1}\phi_{n,k}\). It follows that \(\Phi^{-1}\cir
   \BGL_{n,+} \to[{(\Phi^{-1}\Phi') \vee \phi_{n,n}}] \BGL_{n-1,+} \vee \BGL_n/{\BGL_{n-1}}
 \]
 since \(\phi_{n,n}\) is by definition the canonical projection. Postcomposing
-with \(\Phi\) then shows that the stable map \(\Phi'\vee\phi_{n,n}\colon
+with \(\Phi\vee{\id}\) then shows that the stable map \(\Phi'\vee\phi_{n,n}\colon
 \BGL_{n,+}\to\bigvee_{k=0}^n \BGL_k/{\BGL_{k-1}}\) is a \(\PP^1\)--stable
 equivalence as well.
 \end{proof}
