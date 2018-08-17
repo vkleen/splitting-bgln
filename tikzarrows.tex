@@ -97,6 +97,11 @@
       \draw[to,line width={#2\pgflinewidth},scale=#1](0,.55ex) -- node[iso,pos=0.47,inner sep=#4]{$#3\sim$} (1.6em,.55ex);%
     \end{tikzpicture}}}
 
+\newcommand*\@tikzadjunction[2]{\begin{tikzpicture}[baseline]%
+    \draw[to,line width={#2\pgflinewidth},scale=#1](0,1.7ex) -- node[pos=.5,below,inner sep=.3ex]{\rotatebox[origin=c]{90}{$\vdash$}} (1.6em,1.7ex);
+    \draw[to,line width={#2\pgflinewidth},scale=#1](1.6em,-.3ex) -- (0,-.3ex);
+  \end{tikzpicture}}
+
 \newsavebox{\@todisplay}
 \savebox{\@todisplay}{\@tikzto{1.0}{1}}
 
@@ -131,6 +136,10 @@
   {\usebox{\@mapstoscript}}%
   {\usebox{\@mapstoscriptscript}}}}
 
+\newsavebox{\@tikzadjunctiondisplay}
+\savebox{\@tikzadjunctiondisplay}{\@tikzadjunction{1.0}{1}}
+\newcommand*{\tikzadjunction}{\mathrel{\usebox{\@tikzadjunctiondisplay}}}
+
 \newcommand*\tikzfrom{\mathrel{\mathchoice{\@tikzfrom{1.0}{1}}{\@tikzfrom{1.0}{1}}{\@tikzfrom{0.8}{0.9}}{\@tikzfrom{0.6}{0.75}}}}
 \newcommand*\tikzcto{\mathchoice{\@tikzcto{1.0}{1}}{\@tikzcto{1.0}{1}}{\@tikzcto{0.8}{0.9}}{\@tikzcto{0.6}{0.75}}}
 \newcommand*\tikzonto{\mathchoice{\@tikzonto{1.0}{1}}{\@tikzonto{1.0}{1}}{\@tikzonto{0.8}{0.9}}{\@tikzonto{0.6}{0.75}}}
@@ -154,3 +163,5 @@
 \newcommand*{\iso}{\tikziso}
 
 \renewcommand*{\mapsto}{\tikzmapsto}
+
+\newcommand*{\adjunction}[4]{#1 : #2 \tikzadjunction #3 : #4}

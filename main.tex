@@ -15,21 +15,80 @@
 \section{Introduction}
 
 \begin{theorem}\label{thm:main}
-    Over a field \(k\), there is a \(\PP^1\)--stable splitting \(\Tsusp
-    \BGL_{n,+} \simeq \bigvee_{i=0}^{n-1} \Tsusp \MGL_j\).
+  Over a field \(k\), there is a \(\PP^1\)--stable splitting \(\Tsusp
+  \BGL_{n,+} \simeq \bigvee_{i=0}^{n-1} \Tsusp \MGL_j\).
 \end{theorem}
 
 \section{Becker--Gottlieb Transfers in Motivic Homotopy Theory}
 
-\begin{theorem}
-    Suppose \(S\) is a scheme and \(f \colon X \to S\) is smooth and proper. Then
-    there is a natural \(\PP^1\)--stable map \(\transfer[f]\colon
-    \one{S}\to\Tsusp X_+\) in \(\SH(S)\).
+We will be using the six functor formalism for the stable motivic homotopy
+category established by Ayoub \viktor{reference}. Hoyois \viktor{reference} has
+extended it to arbitrary schemes without noetherian assumptions. In summary,
+for every scheme \(X\) there is a stable closed symmetric monoidal \infcat
+\(\SH(X)\) of motivic spectra over \(X\). For every morphism of schemes
+\(f\colon Y\to X\) there is an adjunction
+\[
+  \adjunction{f^*}{\SH(X)}{\SH(Y)}{f_*}
+\]
+and for \(f\) separated of finite type and \(X\) and \(Y\) quasicompact and
+quasiseparated there is an additional adjunction
+\[
+  \adjunction{f_!}{\SH(Y)}{\SH(X)}{f^!}
+\]
+satisfying various axioms \viktor{add them}.
+
+\begin{definition}
+  In a symmetric monoidal \infcat \(\cal C\), suppose that an object \(X\) is
+  equipped with a map \(\Delta\colon X\to X\otimes C\) for some other object \(C\).
+  Furthermore, suppose that \(X\) is strongly dualizable. The \emph{transfer of
+    \(X\) with respect to \(\Delta\)} is defined as the composition
+  \[
+    \transfer[X,\Delta]\colon \one{} \to[\coev] X\otimes\dual{X} \to[\switch]
+    \dual{X}\otimes X\to[\id\otimes\Delta] \dual{X}\otimes X\otimes
+    C\to[\eval\otimes\id] \one{}\otimes C\wequiv C.
+  \]
+  If there can be no risk of confusion we sometimes write \(\transfer[X] = \transfer[X,\Delta]\).
+\end{definition}
+
+\begin{theorem}[{\parencite[Theorem~1.9]{MR1867203}}]
+  Let \(\cal C\) be a symmetric monoidal stable \infcat and let \(X\to Y\to Z\)
+  be a cofiber sequence in \(\cal C\). Assume that \(C\in\cal C\) is such that
+  \(\_{\otimes}C\) preserves cofiber sequences. Suppose that \(Y\) is equipped
+  with a map \(\Delta_Y\colon Y\to Y\otimes C\) and that \(X\) and \(Y\) are
+  strongly dualizable. Then \(Z\) is strongly dualizable and there are maps
+  \(\Delta_X\) and \(\Delta_Z\) such that
+  \[
+    \begin{tikzcd}
+      X \ar[r] \ar[d, "\Delta_X"] & Y \ar[r] \ar[d,"\Delta_Y"] & Z \ar[d,"\Delta_Z"] \\
+      X\otimes C \ar[r] & Y\otimes C \ar[r] & Z\otimes C
+    \end{tikzcd}
+  \]
+  commutes. Furthermore, we have \(\transfer[Y,\Delta_Y] = \transfer[X,\Delta_X] +
+  \transfer[Z,\Delta_Z]\) in \(\pi_0\map_{\cal C}(\one, C)\).
 \end{theorem}
 
-\begin{lemma}\viktor{maybe it would be better to formulate additivity for
-    distinguished triangles after May first}
-  Suppose \(X = U\cup V\) for \(U,V\) Zariski--open in \(X\). Let
+\begin{lemma}\label{lem:transfer-natural}
+  Suppose there is a cartesian square
+  \[
+    \begin{tikzcd}
+      E' \ar[r]\ar[d] & E \ar[d] \\
+      B' \ar[r] & B
+    \end{tikzcd}
+  \]
+\end{lemma}
+
+\begin{theorem}[{\parencite[Proposition~1.2]{arxiv180610108L}}]
+  Let \(B\) be a scheme over \(S\). Suppose that \(E\in\SH(B)\) and there is a
+  finite Nisnevich covering family \(\{j_i\colon U_i\to B\}\) and that \(j_i^*E
+  \in\SH(U_i)\) is strongly dualizable. Then \(E\) is strongly dualizable as well.
+\end{theorem}
+
+It follows that a smooth map \(E\to B\) over \(S\) which is locally trivial in the
+Nisnevich topology with smooth fiber \(F\) defines a strongly dualizable object
+\(E/B\in\SH(B)\) if \(F/S\in\SH(S)\) is strongly dualizable.
+
+\begin{lemma}\viktor{this is too cumbersome}
+  Suppose \(X = U\cup V\) for \(U,V\) Zariski open in \(X\). Let
   \(\transfer[U]\colon \one{}\to U_+\) and \(\transfer[V]\colon \one{}\to V_+\)
   be the Becker--Gottlieb transfers for \(U\) and \(V\) respectively. Then there
   is a Mayer--Vietoris type decomposition for the transfer
@@ -42,6 +101,7 @@
   \(\transfer[U\cap V]\colon\one{}\to (U\cap V)_+\) is the Becker--Gottlieb
   transfer for \(U\cap V\).
 \end{lemma}
+
 
 \section{Equivariant Transfers of Grassmannians}
 
@@ -119,7 +179,7 @@ where \(\Phi' = \bigvee_{k=0}^{n-1}\phi_{n,k}\). It follows that \(\Phi^{-1}\cir
 \[
   \BGL_{n,+} \to[{(\Phi^{-1}\Phi') \vee \phi_{n,n}}] \BGL_{n-1,+} \vee \BGL_n/{\BGL_{n-1}}
 \]
-since \(\phi_{n,n}\) is by definition the canonical projection. Postcomposing
+since \(\phi_{n,n}\) is by definition the canonical projection. Post-composing
 with \(\Phi\vee{\id}\) then shows that the stable map \(\Phi'\vee\phi_{n,n}\colon
 \BGL_{n,+}\to\bigvee_{k=0}^n \BGL_k/{\BGL_{k-1}}\) is a \(\PP^1\)--stable
 equivalence as well.
