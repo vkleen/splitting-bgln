@@ -19,6 +19,75 @@
   \BGL_{n,+} \simeq \bigvee_{i=0}^{n-1} \Tsusp \MGL_j\).
 \end{theorem}
 
+\section{Stable Motivic Homotopy Theory of Smooth Ind-Schemes}
+\(\SH\) has some six operations-like behaviour when you plug in smooth
+ind-schemes \(X = \colim_i X_i\):
+\[
+  \SH(X) \coloneqq \lim_i \SH(X_i)
+\]
+along pullbacks; \(\SH(X) \simeq \colim_i \SH(X_i)\) along pushforwards in the
+\infcat of presentable \infcats.\viktor{reference; this is presentable \infcat
+  yoga in lurie 5.5.3, isn't it?}
+\viktor{monoidal structure and dualizability is done in HA 4.6.1.11, 4.8.2.18, 3.4.3}
+
+For every morphism \(f\colon X\to Y\) between smooth schemes over \(S\) we have
+an adjunction
+\[
+  \adjunction{f^*}{\SH(X)}{\SH(Y)}{f_*}
+\]
+between the stable presentable \infcats \(\SH(X)\) and \(\SH(Y)\). These
+adjunctions assemble into functors
+\[
+  \SH^*\colon \Sm{S}^\Op \to \PrL
+\]
+and
+\[
+  \SH_*\colon \Sm{S} \to \PrR
+\]
+which are naturally equivalent after composing with the equivalence
+\(\PrL\simeq (\PrR)^\Op\). Because \(\PrR\) is cocomplete, the functor \(\SH_*\)
+naturally extends to a functor
+\[
+  \SH_*\colon \Ind(\Sm{S}) \to \PrR
+\]
+and we obtain a functor
+\[
+  \SH^*\colon \Ind(\Sm{S})^\Op \to \PrL
+\]
+by again composing with the equivalence \(\PrL\simeq(\PrR)^\Op\).
+
+More explicitly, if \((X_i)_{i\in I}\) is a filtered diagram of smooth schemes
+over \(S\) and \(X = \colim_i X_i\) as an ind-scheme over \(S\), then
+\[
+  \SH^*(X) = \lim_i \SH^*(X_i)\quad\text{and}\quad\SH_*(X) = \colim_i \SH_*(X_i).
+\]
+The adjunction \(f^*\dashv f_*\) for a morphism \(f\colon X\to Y\) of ind-schemes is obtained
+by presenting \(f\) as a colimit of maps \(f_i\colon X_i\to Y_i\) between
+schemes over \(S\) and then taking \(f^*\) to be the functor induced on the limits in \(\PrL\)
+and \(f_*\) the functor induced on the colimits in \(\PrR\).
+
+It remains to construct the extra left-adjoint \(f_\#\) for a smooth map \(f\)
+between ind-schemes over \(S\). First, a morphism \(f\colon X\to Y\) between
+ind-schemes is smooth if and only if it is a filtered colimit of smooth maps
+\(f_i\colon X_i \to Y_i\).\viktor{this is a definition, isn't it?}
+
+Note that \(B/S\in\SH(S)\) is by definition \(\pi_\#(\one{B})\) for \(\pi\colon
+B\to S\) a smooth ind-scheme over \(S\). Also, if \(f\colon E\to B\) is a
+smooth morphism, then \(E \isom \colim_k i_k^*E\) is a smooth
+ind-scheme.\viktor{This should follow from weak descent in the big Zariski topos
+  of \(B\); maybe?}
+
+\begin{definition}\label{defn:extended-sharp}
+  Suppose that \(B = \colim{} (B_k)_{k\in I}\) is a smooth ind-scheme over a scheme
+  \(S\) and let \(\pi_k\colon B_k\to S\) and \(\pi\colon B\to S\) be the
+  structure morphisms. Define
+  \[
+    \pi_\#(E) = \colim_{k\in I} \pi_{k\#}i_k^*(E)
+  \]
+  for \(E\in\SH(B)\) where \(i_k\colon B_k\to B\) is the natural map.
+  This way we obtain a functor \(\pi_\#\colon\SH(B)\to\SH(S)\).
+\end{definition}
+
 \section{Becker--Gottlieb Transfers in Motivic Homotopy Theory}
 
 We will be using the six functor formalism for the stable motivic homotopy
@@ -71,7 +140,7 @@ Following \parencite{arxiv180610108L}, for a smooth map \(f\colon E\to B\) with
 \(E/B\in\SH(B)\) strongly dualizable we define the \emph{relative transfer}
 \(\Tr{f/B}\colon\one{B}\to E/B\) as follows: Applying \(f_\#\) to the diagonal
 \(E\to E\times_B E\) gives a morphism \(\Delta\colon E/B\to E/B\smashp E/B\) in
-\(\SH(B)\) and we set \(\Tr{f/B} = \transfer[f,\Delta]\).
+\(\SH(B)\) and we set \(\Tr{f/B} = \transfer[E/B,\Delta]\).
 
 If additionally \(\pi\colon B\to S\) is smooth, we can define the \emph{absolute
   transfer} of \(f\) as
@@ -79,48 +148,25 @@ If additionally \(\pi\colon B\to S\) is smooth, we can define the \emph{absolute
   \Tr{f/S} = \pi_\#(\Tr{f/B})\colon E/S\to B/S.
 \]
 
-We will need to extend this definition of the absolute transfer to a slightly
-more general setting.
-
-\begin{definition}\label{defn:extended-sharp}
-  Suppose \(B\) is the colimit of a sequential diagram\viktor{is this the same
-    as considering \enquote{discrete formally smooth ind-schemes} as in
-    \parencite{arxiv/math/0107143}?}
-  \[
-    B_0 \to B_1 \to \dots \to B_N \to \dots
-  \]
-  of schemes with \(\pi_N\colon B_N\to S\) in \(\Sm{S}\). Then define a functor
-  \(\pi_\#\colon \SH(B)\to\SH(S)\) by \(\pi_\#(E) = \colim_{N\cto\infty}
-  \pi_{N\#}i_N^*(E)\) where \(i_N\colon B_N\to B\).
-\end{definition}
-
-Because \(\pi_{N\#}\) and \(i_N^*\) are both exact functors for all \(N\) and
-sequential colimits preserve finite limits we conclude that \(\pi_\#\colon
-\SH(B)\to\SH(S)\) is exact. For \(f\colon E\to B\) a smooth map of schemes and
-\(B\) as in \autoref{defn:extended-sharp} we define the absolute transfer of
-\(f\) to be \(\Tr{f/S} = \pi_\#(\Tr{f/B})\colon E/S\to B/S\).\viktor{prove that
-  \(\pi_\#(\one{B}) = B/S\)}
-
 \begin{lemma}\label{lem:transfer-natural}
-  Suppose there is a cartesian square
+  Let \(S\) be a scheme and \(B\) and \(B'\) smooth ind-schemes over \(S\).
+  Suppose that \(f\colon E\to B\) is smooth with \(E/B\in\SH(B)\) strongly
+  dualizable and
   \[
     \begin{tikzcd}
       E' \ar[r]\ar[d, "f'"] & E \ar[d, "f"] \\
       B' \ar[r, "i"'] & B
     \end{tikzcd}
   \]
-  of schemes with \(f\) and \(i\) smooth. Also, assume that \(E/B\in\SH(B)\) is
-  strongly dualizable. Then \(f^*(E/B) = E'/B'\in\SH(B')\) is strongly
-  dualizable as well. Denote by \(\transfer[f]\colon \one{B}\to E/B\) and
-  \(\transfer[f']\colon \one{B'}\to E'/B'\) the transfers of \(E/B\) and
-  \(E'/B'\) with respect to their respective diagonals.\viktor{meh} We obtain a
-  diagram\viktor{check this diagram looks like it should w/ 6 operations}
+  is cartesian. Then \(i^*(E/B) = E'/B'\in\SH(B')\) is strongly dualizable as
+  well and we have \(\Tr{f'/B'} = i^*\Tr{f/B}\). Furthermore, the square
   \[
     \begin{tikzcd}
-      \mathllap{i_\#(E'/B') ={}} E'/B \ar[r] & E/B \\
-      \mathllap{i_\#\one{B'} ={}} B'/B \ar[u, "{i_\#(\transfer[f'])}"]\ar[r] & \one{B} \ar[u, "{\transfer[f]}"]
+      E'/S \ar[r] & E/S \\
+      B'/S \ar[r, "i"'] \ar[u, "{\Tr{f'/S}}"] & B/S \ar[u, "{\Tr{f/S}}"']
     \end{tikzcd}
   \]
+  is commutative.
 \end{lemma}
 
 \begin{theorem}[{\parencite[Proposition~1.2]{arxiv180610108L}}]
@@ -149,7 +195,7 @@ Nisnevich topology with smooth fiber \(F\) defines a strongly dualizable object
 \end{lemma}
 
 
-\section{Equivariant Transfers of Grassmannians}
+\section{Equivariant Transfers of Grassmannians\viktor{change that title}}
 
 \begin{lemma}\label{lem:grassmann-decomp}
   Suppose \(k<n\). The open complement of the closed immersion
