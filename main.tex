@@ -20,6 +20,10 @@
 \end{theorem}
 
 \section{Stable Motivic Homotopy Theory of Smooth Ind-Schemes}
+An ind-scheme over \(S\) is an object of \(\Ind(\Sm{S})\), the \infcat of
+ind-objects in the category of smooth schemes over \(S\) with arbitrary
+morphisms between them.
+
 \(\SH\) has some six operations-like behaviour when you plug in smooth
 ind-schemes \(X = \colim_i X_i\):
 \[
@@ -30,23 +34,18 @@ along pullbacks; \(\SH(X) \simeq \colim_i \SH(X_i)\) along pushforwards in the
   yoga in lurie 5.5.3, isn't it?}
 \viktor{monoidal structure and dualizability is done in HA 4.6.1.11, 4.8.2.18, 3.4.3}
 
+\viktor{formulate a proposition for the ind-scheme stuff}
+
 For every morphism \(f\colon X\to Y\) between smooth schemes over \(S\) we have
 an adjunction
 \[
   \adjunction{f^*}{\SH(X)}{\SH(Y)}{f_*}
 \]
 between the stable presentable \infcats \(\SH(X)\) and \(\SH(Y)\). These
-adjunctions assemble into functors
-\[
-  \SH^*\colon \Sm{S}^\Op \to \PrL
-\]
-and
-\[
-  \SH_*\colon \Sm{S} \to \PrR
-\]
-which are naturally equivalent after composing with the equivalence
-\(\PrL\simeq (\PrR)^\Op\). Because \(\PrR\) is cocomplete, the functor \(\SH_*\)
-naturally extends to a functor
+adjunctions assemble into functors \(\SH^*\colon \Sm{S}^\Op \to \PrL\) and
+\(\SH_*\colon \Sm{S} \to \PrR\) which are naturally equivalent after composing
+with the equivalence \(\PrL\simeq (\PrR)^\Op\). Because \(\PrR\) is cocomplete,
+the functor \(\SH_*\) naturally extends to a functor
 \[
   \SH_*\colon \Ind(\Sm{S}) \to \PrR
 \]
@@ -61,6 +60,10 @@ over \(S\) and \(X = \colim_i X_i\) as an ind-scheme over \(S\), then
 \[
   \SH^*(X) = \lim_i \SH^*(X_i)\quad\text{and}\quad\SH_*(X) = \colim_i \SH_*(X_i).
 \]
+Note that \(\SH^*(X)\) and \(\SH_*(X)\) are equivalent \infcats since limits
+along left adjoints in \(\PrL\) correspond to colimits along their right
+adjoints in \(\PrR\), see \parencite[section~5.5.3]{mr2522659}.
+
 The adjunction \(f^*\dashv f_*\) for a morphism \(f\colon X\to Y\) of ind-schemes is obtained
 by presenting \(f\) as a colimit of maps \(f_i\colon X_i\to Y_i\) between
 schemes over \(S\) and then taking \(f^*\) to be the functor induced on the limits in \(\PrL\)
@@ -69,42 +72,51 @@ and \(f_*\) the functor induced on the colimits in \(\PrR\).
 It remains to construct the extra left-adjoint \(f_\#\) for a smooth map \(f\)
 between ind-schemes over \(S\). First, a morphism \(f\colon X\to Y\) between
 ind-schemes is smooth if and only if it is a filtered colimit of smooth maps
-\(f_i\colon X_i \to Y_i\).\viktor{this is a definition, isn't it?}
+\(f_i\colon X_i \to Y_i\)\viktor{this is a definition, isn't it?}. Each
+\(f_i^*\) admits a left adjoint \(f_{i\#}\) and since \(\PrR\) is stable under
+limits, the functor \(f^*\colon \SH^*(Y)\to\SH^*(X)\) admits a left adjoint as
+well. That is to say, \(\SH^*\colon\Ind(\Sm{S})^\Op\to\PrL\) restricts to a
+functor \(\SH^*\colon\Ind(\Sm{S})_{\sm}^\Op \to \PrR\) from the wide subcategory
+of \(\Ind(\Sm{S})\) consisting of smooth maps between smooth ind-schemes over
+\(S\). Composing with the equivalence \(\PrL\simeq (\PrR)^\Op\) then yields the
+functor
+\[
+  \SH_\#\colon\Ind(\Sm{S})_\sm\to\PrL.
+\]
 
-Note that \(B/S\in\SH(S)\) is by definition \(\pi_\#(\one{B})\) for \(\pi\colon
-B\to S\) a smooth ind-scheme over \(S\). Also, if \(f\colon E\to B\) is a
-smooth morphism, then \(E \isom \colim_k i_k^*E\) is a smooth
-ind-scheme.\viktor{This should follow from weak descent in the big Zariski topos
-  of \(B\); maybe?}
+Following \parencite{arxiv180610108L}, for a smooth morphism \(f\colon X\to Y\)
+of ind-schemes over \(S\) we define \(X/Y = f_\#(\one{X})\in\SH(Y)\) where
+\(\one{X}\) denotes the monoidal unit in \(\SH(X)\). In particular, if \(Y=S\),
+we see that any ind-scheme \(X\) over \(S\) determines an object
+\(X/S\in\SH(S)\).
 
-\begin{definition}\label{defn:extended-sharp}
-  Suppose that \(B = \colim{} (B_k)_{k\in I}\) is a smooth ind-scheme over a scheme
-  \(S\) and let \(\pi_k\colon B_k\to S\) and \(\pi\colon B\to S\) be the
-  structure morphisms. Define
-  \[
-    \pi_\#(E) = \colim_{k\in I} \pi_{k\#}i_k^*(E)
-  \]
-  for \(E\in\SH(B)\) where \(i_k\colon B_k\to B\) is the natural map.
-  This way we obtain a functor \(\pi_\#\colon\SH(B)\to\SH(S)\).
-\end{definition}
+\begin{proposition}\label{prop:objects-of-slash-S}
+  Suppose an ind-scheme \(X\) is presented as a colimit \(X = \colim_i X_i\) in
+  \(\Ind(\Sm{S})\). Then there is a natural equivalence \(X/S\simeq \colim_i
+  X_i/S\) in \(\SH(S)\).
+\end{proposition}
+\begin{proof}
+  Write \(\pi\colon X\to S\) and \(\pi_i\colon X_i\to S\) for the structure
+  morphisms. Suppose \(Y\in\SH(S)\) is arbitrary. Then we have natural
+  equivalences
+  \begin{align*}
+    \map_{\SH(S)}(\pi_\#\one{X}, Y) &\simeq \map_{\SH(X)}(\one{X}, \pi^*Y) \\
+                                    &\simeq \lim_i\map_{\SH(X_i)}(\one{X_i}, \pi_i^*Y) \\
+                                    &\simeq \lim_i \map_{\SH(S)}(\pi_{i\#}\one{X_i}, Y) \\
+                                    &\simeq \map_{\SH(S)}(\colim_i X_i/S, Y)
+  \end{align*}
+  of mapping spaces. The Yoneda lemma implies that \(X/S =\pi_\#\one{X}\simeq \colim_i
+  X_i/S\) in \(\SH(S)\).
+\end{proof}
+
+This proposition allows us to extend the definition of the functor
+\(\_/S\colon\Sm{S}\to\SH(S)\) in \parencite{arxiv180610108L} to ind-schemes. The
+functor \(\_/S\colon\Sm{S}\to\SH(S)\) extends essentially uniquely to a functor
+\(\_/S\colon \Ind(\Sm{S})\to\SH(S)\) because \(\SH(S)\) is cocomplete. By
+\autoref{prop:objects-of-slash-S} this coincides on objects with the previous
+construction \(\pi_\#(\one{X})\) for a smooth ind-scheme \(\pi\colon X\to S\).
 
 \section{Becker--Gottlieb Transfers in Motivic Homotopy Theory}
-
-We will be using the six functor formalism for the stable motivic homotopy
-category established by Ayoub \viktor{reference}. Hoyois \viktor{reference} has
-extended it to arbitrary schemes without noetherian assumptions. In summary,
-for every scheme \(X\) there is a stable closed symmetric monoidal \infcat
-\(\SH(X)\) of motivic spectra over \(X\). For every morphism of schemes
-\(f\colon Y\to X\) there is an adjunction
-\[
-  \adjunction{f^*}{\SH(X)}{\SH(Y)}{f_*}
-\]
-and for \(f\) separated of finite type and \(X\) and \(Y\) quasicompact and
-quasiseparated there is an additional adjunction
-\[
-  \adjunction{f_!}{\SH(Y)}{\SH(X)}{f^!}
-\]
-satisfying various axioms \viktor{add them}.
 
 \begin{definition}
   In a symmetric monoidal \infcat \(\cal C\), suppose that an object \(X\) is
@@ -136,14 +148,15 @@ satisfying various axioms \viktor{add them}.
   \transfer[Z,\Delta_Z]\) in \(\pi_0\map_{\cal C}(\one, C)\).
 \end{theorem}
 
-Following \parencite{arxiv180610108L}, for a smooth map \(f\colon E\to B\) with
+Following \parencite{arxiv180610108L}, for a smooth map \(f\colon E\to B\)
+between smooth ind-schemes over \(S\) with
 \(E/B\in\SH(B)\) strongly dualizable we define the \emph{relative transfer}
 \(\Tr{f/B}\colon\one{B}\to E/B\) as follows: Applying \(f_\#\) to the diagonal
 \(E\to E\times_B E\) gives a morphism \(\Delta\colon E/B\to E/B\smashp E/B\) in
 \(\SH(B)\) and we set \(\Tr{f/B} = \transfer[E/B,\Delta]\).
 
-If additionally \(\pi\colon B\to S\) is smooth, we can define the \emph{absolute
-  transfer} of \(f\) as
+Additionally, since \(\pi\colon B\to S\) is a smooth ind-scheme, we can define
+the \emph{absolute transfer} of \(f\) as
 \[
   \Tr{f/S} = \pi_\#(\Tr{f/B})\colon E/S\to B/S.
 \]
@@ -154,7 +167,7 @@ If additionally \(\pi\colon B\to S\) is smooth, we can define the \emph{absolute
   dualizable and
   \[
     \begin{tikzcd}
-      E' \ar[r]\ar[d, "f'"] & E \ar[d, "f"] \\
+      E' \ar[r, "i'"]\ar[d, "f'"] & E \ar[d, "f"] \\
       B' \ar[r, "i"'] & B
     \end{tikzcd}
   \]
@@ -162,22 +175,61 @@ If additionally \(\pi\colon B\to S\) is smooth, we can define the \emph{absolute
   well and we have \(\Tr{f'/B'} = i^*\Tr{f/B}\). Furthermore, the square
   \[
     \begin{tikzcd}
-      E'/S \ar[r] & E/S \\
-      B'/S \ar[r, "i"'] \ar[u, "{\Tr{f'/S}}"] & B/S \ar[u, "{\Tr{f/S}}"']
+      E'/S \ar[r, "i'/S"] & E/S \\
+      B'/S \ar[r, "i/S"'] \ar[u, "{\Tr{f'/S}}"] & B/S \ar[u, "{\Tr{f/S}}"']
     \end{tikzcd}
   \]
-  is commutative.
+  is homotopy commutative.
 \end{lemma}
+\begin{proof}
+  The first two identities \(i^*(E/B) = E'/B'\) and \(\Tr{f'/B'} = i^*\Tr{f/B}\)
+  are proven in \parencite[Lemma~1.6]{arxiv180610108L}. Write \(p\colon B'\to
+  S\) and \(q\colon B\to S\) for the structure morphisms. There is a natural
+  transformation \(p_\#i^*\to q_\#\) defined as the composition
+  \[
+    p_\#i^* \to[\unit] p_\#i^*q^*q_\# \simeq p_\# p^*q_\# \to[\counit] q_\#.
+  \]
+  Consequently, we obtain a homotopy commutative diagram
+  \[
+    \begin{tikzcd}[column sep=5em]
+      \mathllap{B'/S = {}}p_\#p^*\one{S} \ar[r, "p_\#\Tr{f'/B'}"] \ar[d, equal] & p_\#f'_\#
+      {i'}^*f^*q^*\one{S}\mathrlap{{} = E'/S}\ar[d, "\Ex_\#^*"] \\
+      p_\#i^*q^*\one{S} \ar[r, "p_\#i^*\Tr{f/B}"] \ar[d] &
+      p_\#i^*f_\#f^*q^*\one{S} \ar[d] \\
+      \mathllap{B/S = {}}q_\# q^*\one{S} \ar[r, "q_\#\Tr{f/B}"'] & q_\#
+      f_\#f^*q^*\one{S}\mathrlap{{} = E/S.}
+    \end{tikzcd}
+  \]
+  Chasing through the definition of \(p_\#i^*\to q_\#\) shows that the leftmost
+  composite vertical map is \(i/S\) and that the rightmost vertical map is \(i'/S\).
+\end{proof}
 
-\begin{theorem}[{\parencite[Proposition~1.2]{arxiv180610108L}}]
+\begin{theorem}[{\parencite[Proposition~1.2]{arxiv180610108L}}]\label{thm:local-dualizability}
   Let \(B\) be a scheme over \(S\). Suppose that \(E\in\SH(B)\) and there is a
   finite Nisnevich covering family \(\{j_i\colon U_i\to B\}\) and that \(j_i^*E
   \in\SH(U_i)\) is strongly dualizable. Then \(E\) is strongly dualizable as well.
 \end{theorem}
 
-It follows that a smooth map \(E\to B\) over \(S\) which is locally trivial in the
-Nisnevich topology with smooth fiber \(F\) defines a strongly dualizable object
-\(E/B\in\SH(B)\) if \(F/S\in\SH(S)\) is strongly dualizable.
+It follows that a smooth map \(E\to B\) of schemes over \(S\) which is locally
+trivial in the Nisnevich topology with smooth fiber \(F\) defines a strongly
+dualizable object \(E/B\in\SH(B)\) if \(F/S\in\SH(S)\) is strongly dualizable.
+
+\begin{lemma}\label{lem:ind-dualizability}
+  Suppose \(B\) is a smooth ind-scheme over \(S\) and \(E\in\SH(B)\). If \(B\)
+  is presented as a filtered colimit \(B = \colim_i B_i\) of smooth schemes in
+  \(\Ind(\Sm{S})\), let \(f_i\colon B_i\to B\) be the canonical map. Then
+  \(E\in\SH(B)\) is strongly dualizable if \(f_i^*E\in\SH(B_i)\) is strongly
+  dualizable for every \(i\).
+\end{lemma}
+\begin{proof}
+  \viktor{prove this}
+
+  % By \parencite[Proposition~4.6.1.11]{higheralgebra} it will be enough to show
+  % that pullback \(i\colon E \to \Gr[N]{n}\) of \(i_{r,n}\) along
+  % \(\Gr[N]{n}\to\Gr{n}\) defines a dualizable object in \(\SH{\Gr[N]{n}}\). By
+  % \autoref{lem:gr-fiber-bundle} the morphism \(i\) is a Zariski-locally trivial
+  % fiber bundle with fiber \(\GL_n/(\GL_r\times\GL_{n-r})\) over \(\Gr[N]{n}\).
+\end{proof}
 
 \begin{lemma}\viktor{this is too cumbersome}
   Suppose \(X = U\cup V\) for \(U,V\) Zariski open in \(X\). Let
@@ -195,29 +247,116 @@ Nisnevich topology with smooth fiber \(F\) defines a strongly dualizable object
 \end{lemma}
 
 
-\section{Equivariant Transfers of Grassmannians\viktor{change that title}}
+\section{Transfers of Grassmannians}
 
-\begin{lemma}\label{lem:grassmann-decomp}
-  Suppose \(k<n\). The open complement of the closed immersion
-  \(\Gr[n-1]{k-1}\clim \Gr[n]{k}\) is the total space of a vector bundle of rank
-  \(k\) over \(\Gr[n-1]{k}\).
+From now on, we assume for simplicity of exposition that the base scheme \(S\)
+is the spectrum of  a field \(k\).
 
-  Dually, the open complement of \(\Gr[n-1]{k}\clim \Gr[n]{k}\) is the total
-  space of a vector bundle of rank \(n-k\) over \(\Gr[n-1]{k-1}\).
+\begin{definition}
+  The ind-scheme \(\Gr{r}\) is the sequential colimit of the Grassmannians
+  \(\Gr[n]{r}\) of \(r\)--planes in \(n\)--space along the canonical closed immersions
+  \(\Gr[n]{r}\clim\Gr[n+1]{r}\).
+\end{definition}
+
+The bijections
+\[
+  \hom_{\Sm{k}}(\Spec(A), \Gr[n]{r}) = \{\text{projective submodules \(P\subset A^n\) of
+    rank \(r\)}\}
+\]
+extend to a bijection
+\[
+  \hom_{\Ind(\Sm{k})}(\Spec(A), \Gr{r}) = \{\text{projective modules \(P\) over \(A\) of rank \(r\)}\}
+\]
+along the defining colimit for \(\Gr{r}\).
+
+For projective modules \(P\) and \(Q\) of rank \(r\) and \(n-r\) over a \(k\)--algebra
+\(A\), consider the assignment \((P,Q)\mapsto P\oplus Q\). Since \(P\oplus Q\)
+is projective of rank \(n\) over \(A\), this defines a morphism
+\[
+  i_{r,n}\colon\Gr{r}\times\Gr{n-r} \to \Gr{n}.
+\]
+
+It is well known that \(\Gr{r}\) is a model of \(\BGL_r\) in the
+\(\AA^1\)--homotopy category. The morphism \(i_{r,n}\) is a delooping of the
+block--diagonal inclusion \(\GL_r\times\GL_{n-r}\to\GL_n\). The goal of this
+section is to give an inductive description of the absolute transfer
+\(\transfer[n,r]\colon \BGL_{n,+}\to\BGL_{r,+}\smashp\BGL_{n-r,+}\) of \(i_{r,n}\) in \(\SH(k)\).
+
+\begin{lemma}\label{lem:gr-fiber-bundle}
+  The morphism \(i_{r,n}\colon \Gr{r}\times\Gr{n-r}\to\Gr{n}\) is a Zariski--locally trivial
+  \(\GL_n\)--torsor over \(\Gr{n}\). Its fiber is
+  \(\GL_n/(\GL_r\times\GL_{n-r})\), the cofiber of the block--diagonal inclusion.
 \end{lemma}
+\begin{proof}
+  \viktor{prove this}
+\end{proof}
+
+We note that \(\GL_n/(\GL_r\times\GL_{n-r})\) is equivalent to \(\Gr[n]{r}\) in
+\(\H(k)\). This can be seen as follows. Let \(P\) be the maximal parabolic
+subgroup of \(\GL_n\) containing \(\GL_r\times\GL_{n-r}\). Then \(P\) is
+isomorphic to a semidirect product of \(\GL_r\times\GL_{n-r}\) with a unipotent
+group \(U\). As a scheme, \(U\) is isomorphic to \(\AA^{r(n-r)}\) and therefore
+\(P\simeq \GL_r\times\GL_{n-r}\) in \(\H(k)\). Consequently, the cofiber of the
+inclusion of \(\GL_r\times\GL_{n-r}\) into \(\GL_n\) is \(\AA^1\)--homotopy
+equivalent to the quotient \(\GL_n/P\isom \Gr[n]{r}\).
 
 \begin{lemma}
-  Suppose \(k < n\) and let \(\transfer[n,k]\colon \one{} \to \Gr[n]{k}_+\)
-  denote the Becker--Gottlieb transfer for \(\Gr[n]{k}\) in \(\SH^{\GL_{n-1}}\).
-  Write \(i_{k-1}\colon \Gr[n-1]{k-1}\clim \Gr[n]{k}\)  and \(i_k\colon
-  \Gr[n-1]{k}\clim \Gr[n]{k}\) for the inclusions\viktor{which inclusions
-    exactly?}. Then
-  \begin{align*}
-    \transfer[n,k] &= i_{k-1,+}\circ\transfer[n-1,k-1] + (1 + \chi) i_{k,+}\circ\transfer[n,k-1] =\\
-                   &= (1 + \chi')i_{k-1,+}\circ\transfer[n-1,k-1] + i_{k,+}\circ\transfer[n,k-1]
-  \end{align*}
-  \viktor{what's \(\chi\) and \(\chi'\)?}
+  The morphism \(i_{r,n}\colon\Gr{r}\times\Gr{n-r}\to\Gr{n}\) defines a
+  strongly dualizable object in \(\SH(\Gr{n})\).
 \end{lemma}
+\begin{proof}
+  By \autoref{lem:ind-dualizability} it will be enough to show that the
+  pullback \(i\colon E\to \Gr[N]{n}\) of \(i_{r,n}\) along the inclusion
+  \(\Gr[N]{n}\to\Gr{n}\) defines a dualizable object in \(\SH(\Gr[N]{n})\) for
+  all \(N\). But, by \autoref{lem:gr-fiber-bundle} the morphism \(i\) is a
+  Zariski-locally trivial fiber bundle over \(\Gr[N]{n}\) with fiber
+  \(X = \GL_n/(\GL_r\times\GL_{n-r})\). Hence, to show that \(i\) defines a strongly
+  dualizable object in \(\SH(\Gr[N]{n})\), by \autoref{thm:local-dualizability}
+  it is enough to show that \(X/k\in\SH(k)\) is strongly dualizable.
+
+  But we have seen that \(X\simeq\Gr[n]{r}\) in \(\H(k)\) and therefore also in
+  \(\SH(k)\). The scheme \(\Gr[n]{r}\) is smooth and proper, so motivic Atiyah
+  duality implies that \(\Gr[n]{r}/k\) and therefore also \(X/k\) is strongly
+  dualizable in \(\SH(k)\), see for example \parencite[Proposition~1.2]{arxiv180610108L}.
+\end{proof}
+
+\begin{lemma}\label{lem:grassmann-decomp}
+  Suppose \(r<n\). The open complement of the closed immersion
+  \(\Gr[n-1]{r}\clim \Gr[n]{r}\) is the total space of a vector bundle of rank
+  \(n-r\) over \(\Gr[n-1]{r-1}\).
+\end{lemma}
+\begin{proof}
+  Let \(A\) be a \(k\)--algebra. On \(\Spec(A)\)--valued points, the inclusion
+  \(\Gr[n-1]{r}\clim\Gr[n]{r}\) is given by considering a projective submodule
+  \(P\) of \(A^{n-1}\) as a submodule of \(A^n = A^{n-1}\oplus A\). It follows
+  that the complement of \(\Gr[n-1]{r}\) has \(\Spec(A)\)--valued points
+  \[
+    U(\Spec A) = \{P\subset A^n : \text{\(P\) is projective of rank \(r\) and
+      \(P \not\subset A^{n-1}\oplus 0\)}\}.
+  \]
+  Given \(P\in U(\Spec A)\), the module \(P\cap (A^{n-1}\oplus 0)\)
+  \viktor{prove this}
+\end{proof}
+
+\begin{proposition}
+  Suppose \(r<n\) and consider the composition
+  \[
+    \varphi\colon \Gr{n-1,+} \to[\incl] \Gr{n+} \to[{\transfer[n,r]}]\Gr{r+}\smashp\Gr{n-r,+}
+  \]
+  where \(\incl\) is given by the assignment \(P\mapsto P\oplus A\) on \(\Spec(A)\)--valued
+  points. Then there is a map \(\psi\colon \Gr{n-1,+}\to
+  \Gr{r-1,+}\smashp\Gr{n-r,+}\) in \(\SH(k)\) such that \(\varphi\) is the sum
+  of the compositions
+  \begin{align*}
+    \Gr{r-1,+} \to[{\transfer[n,r-1]}]\Gr{r,+}\smashp\Gr{n-1-r,+} \to[\id\smashp\incl]\Gr{r,+}\smashp\Gr{n-r,+} \\
+    \Gr{r-1,+} \to[{\transfer[n-1,r-1]}]\Gr{r-1,+}\smashp\Gr{n-r,+}\to[\incl\smashp\id]\Gr{r,+}\smashp\Gr{n-r,+} \\
+\shortintertext{and}
+    \Gr{r-1,+}\to[\psi]\Gr{r-1,+}\smashp\Gr{n-r,+} \to[\incl\smashp\id]\Gr{r,+}\smashp\Gr{n-r,+}.
+  \end{align*}
+\end{proposition}
+\begin{proof}
+  \viktor{prove this}
+\end{proof}
 
 \section{Proof of the Theorem}
 
@@ -227,7 +366,7 @@ The inclusions \(\GL_i\to\GL_n\) induce a filtration
     \dots\to[i_m] \BGL_{m,+}.
 \]
 For \(k \leq n\) the block--diagonal inclusion \(i_{k,n}\colon\BGL_k\times\BGL_{n-k}\to \BGL_n\) has
-homotopy fibers \(\GL_n/{\GL_k\times\GL_{n-k}}\). This homogeneous space is
+homotopy fibers \(\GL_n/(\GL_k\times\GL_{n-k})\). This homogeneous space is
 \(\AA^1\)--homotopy equivalent to the Grassmannian \(\Gr[n]{k}\) of \(k\)--planes
 in \(n\)--space which is smooth and proper. Consequently, \(i_{k,n}\) admits a
 Becker--Gottlieb transfer \(\transfer[n,k]\colon\BGL_{n,+}\to \BGL_{k,+}\smashp
