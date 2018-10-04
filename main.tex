@@ -131,7 +131,7 @@ construction \(\pi_\#(\one{X})\) for a smooth ind-scheme \(\pi\colon X\to S\).
   If there can be no risk of confusion we sometimes write \(\transfer[X] = \transfer[X,\Delta]\).
 \end{definition}
 
-\begin{theorem}[{\parencite[Theorem~1.9]{MR1867203}}]
+\begin{theorem}[{\parencite[Theorem~1.9]{MR1867203}}]\label{thm:transfer-additivity}
   Let \(\cal C\) be a symmetric monoidal stable \infcat and let \(X\to Y\to Z\)
   be a cofiber sequence in \(\cal C\). Assume that \(C\in\cal C\) is such that
   \(\_{\otimes}C\) preserves cofiber sequences. Suppose that \(Y\) is equipped
@@ -217,40 +217,19 @@ dualizable object \(E/B\in\SH(B)\) if \(F/S\in\SH(S)\) is strongly dualizable.
 \begin{lemma}\label{lem:ind-dualizability}
   Suppose \(B\) is a smooth ind-scheme over \(S\) and \(E\in\SH(B)\). If \(B\)
   is presented as a filtered colimit \(B = \colim_i B_i\) of smooth schemes in
-  \(\Ind(\Sm{S})\), let \(f_i\colon B_i\to B\) be the canonical map. Then
-  \(E\in\SH(B)\) is strongly dualizable if \(f_i^*E\in\SH(B_i)\) is strongly
-  dualizable for every \(i\).
+  \(\Ind(\Sm{S})\), let \(f_i\colon B_i\to B\) be the canonical map for each
+  \(i\). Then \(E\in\SH(B)\) is strongly dualizable if and only if
+  \(f_i^*E\in\SH(B_i)\) is strongly dualizable for every \(i\).
 \end{lemma}
 \begin{proof}
-  \viktor{prove this}
-
-  % By \parencite[Proposition~4.6.1.11]{higheralgebra} it will be enough to show
-  % that pullback \(i\colon E \to \Gr[N]{n}\) of \(i_{r,n}\) along
-  % \(\Gr[N]{n}\to\Gr{n}\) defines a dualizable object in \(\SH{\Gr[N]{n}}\). By
-  % \autoref{lem:gr-fiber-bundle} the morphism \(i\) is a Zariski-locally trivial
-  % fiber bundle with fiber \(\GL_n/(\GL_r\times\GL_{n-r})\) over \(\Gr[N]{n}\).
+  This follows from \parencite[Proposition~4.6.1.11]{higheralgebra} since we
+  have \(\SH(B)\simeq \lim_i\SH(B_i)\).
 \end{proof}
-
-\begin{lemma}\viktor{this is too cumbersome}
-  Suppose \(X = U\cup V\) for \(U,V\) Zariski open in \(X\). Let
-  \(\transfer[U]\colon \one{}\to U_+\) and \(\transfer[V]\colon \one{}\to V_+\)
-  be the Becker--Gottlieb transfers for \(U\) and \(V\) respectively. Then there
-  is a Mayer--Vietoris type decomposition for the transfer
-  \(\transfer[X]\colon\one{}\to X_+\), namely
-  \[
-    \transfer[X] = i_{U,+}\circ\transfer[U] + i_{V,+}\circ\transfer[V] -
-    i_{U\cap V,+}\circ\transfer[U\cap V]
-  \]
-  where \(i_U\), \(i_V\) and \(i_{U\cap V}\) are the evident inclusions and
-  \(\transfer[U\cap V]\colon\one{}\to (U\cap V)_+\) is the Becker--Gottlieb
-  transfer for \(U\cap V\).
-\end{lemma}
-
 
 \section{Transfers of Grassmannians}
 
-From now on, we assume for simplicity of exposition that the base scheme \(S\)
-is the spectrum of  a field \(k\).
+From now on, we assume that the base scheme \(S\) is the spectrum of a field
+\(k\).
 
 \begin{definition}
   The ind-scheme \(\Gr{r}\) is the sequential colimit of the Grassmannians
@@ -258,55 +237,76 @@ is the spectrum of  a field \(k\).
   \(\Gr[n]{r}\clim\Gr[n+1]{r}\).
 \end{definition}
 
-The bijections
-\[
-  \hom_{\Sm{k}}(\Spec(A), \Gr[n]{r}) = \{\text{projective submodules \(P\subset A^n\) of
-    rank \(r\)}\}
-\]
-extend to a bijection
-\[
-  \hom_{\Ind(\Sm{k})}(\Spec(A), \Gr{r}) = \{\text{projective modules \(P\) over \(A\) of rank \(r\)}\}
-\]
-along the defining colimit for \(\Gr{r}\).
+It is well that known \(\Gr{r}\) is a model of \(\BGL_r\) in the
+\(\AA^1\)--homotopy category. In fact, let \(U_r(N)\) be the scheme of
+monomorphisms \(\cal O^r \to \cal O^N\). Along \(\cal O^N\oplus 0 \subset \cal
+O^{N+1}\), there are closed embeddings \(U_r(N)\clim U_r(N+1)\) and
+\parencite[Proposition~4.3.7]{mv} shows that the colimit \(U_r(\infty) =
+\colim_N U_r(N)\) along these embeddings is contractible in \(\H(k)\). Also, the
+quotient \(U_r(N)/\GL_r\) is isomorphic to \(\Gr[N]{r}\) and consequently
+\(U_r(\infty)/\GL_r\isom \Gr{r}\) is a model for \(\BGL_r\).
 
-For projective modules \(P\) and \(Q\) of rank \(r\) and \(n-r\) over a \(k\)--algebra
-\(A\), consider the assignment \((P,Q)\mapsto P\oplus Q\). Since \(P\oplus Q\)
-is projective of rank \(n\) over \(A\), this defines a morphism
+Direct sum defines a morphism \(U_r(N)\times U_{n-r}(N)\to U_n(2N)\) which is
+equivariant with respect to the block diagonal inclusion
+\(\GL_r\times\GL_{n-r}\to \GL_n\). Passing to the colimit \(N\cto\infty\) and
+taking quotients yields a morphism
 \[
   i_{r,n}\colon\Gr{r}\times\Gr{n-r} \to \Gr{n}.
 \]
+The goal of this section is to develop a partial inductive description of the
+absolute transfer \(\transfer[n,r]\colon
+\BGL_{n,+}\to\BGL_{r,+}\smashp\BGL_{n-r,+}\) of \(i_{r,n}\) in \(\SH(k)\). For
+this purpose a slightly different version of \(i_{r,n}\) in \(\H(k)\) will
+be more convenient.
 
-It is well known that \(\Gr{r}\) is a model of \(\BGL_r\) in the
-\(\AA^1\)--homotopy category. The morphism \(i_{r,n}\) is a delooping of the
-block--diagonal inclusion \(\GL_r\times\GL_{n-r}\to\GL_n\). The goal of this
-section is to give an inductive description of the absolute transfer
-\(\transfer[n,r]\colon \BGL_{n,+}\to\BGL_{r,+}\smashp\BGL_{n-r,+}\) of \(i_{r,n}\) in \(\SH(k)\).
-
-\begin{lemma}\label{lem:gr-fiber-bundle}
-  The morphism \(i_{r,n}\colon \Gr{r}\times\Gr{n-r}\to\Gr{n}\) is a Zariski--locally trivial
-  \(\GL_n\)--torsor over \(\Gr{n}\). Its fiber is
-  \(\GL_n/(\GL_r\times\GL_{n-r})\), the cofiber of the block--diagonal inclusion.
+\begin{lemma}
+  In \(\H(k)\) there is an equivalence \(\Gr{r}\times\Gr{n-r}\to
+  U_n(\infty)/(\GL_r\times\GL_{n-r})\). Along this equivalence, \(i_{r,n}\)
+  corresponds to the quotient
+  \[
+    \overline{i_{r,n}}\colon U_n(\infty)/(\GL_r\times\GL_{n-r}) \to U_n(\infty)/\GL_n\isom \Gr{n}
+  \]
+  by \(\GL_n\).
 \end{lemma}
 \begin{proof}
-  \viktor{prove this}
+  Writing \(\varphi\colon U_r(N)\times U_{n-r}(N)\to U_n(2N)\) for the map
+  induced by taking direct sums, we obtain a commutative diagram
+  \[
+    \begin{tikzcd}
+      U_r(N)\times U_{n-r}(N) \ar[r, "\varphi"]\ar[d] & U_n(2N)\ar[d] \\
+      \Gr[N]{r}\times\Gr[N]{n-r} \ar[r]\ar[dr, "i_{r,n}"'] & U_n(2N)/(\GL_r\times\GL_{n-r})\ar[d] \\
+      & \Gr[2N]{n}.
+    \end{tikzcd}
+  \]
+  Passing to the colimit \(N\cto\infty\) the horizontal maps become equivalences.
+\end{proof}
+
+\begin{lemma}\label{lem:gr-fiber-bundle}
+  The morphism \(\overline{i_{r,n}}\) is a Zariski--locally trivial bundle over
+  \(\Gr{n}\). Its fiber is the quotient \(\GL_n/(\GL_r\times\GL_{n-r})\).
+\end{lemma}
+\begin{proof}
+  By construction, the morphism \(\overline{i_{r,n}}\) is isomorphic to the
+  colimit of the quotient maps \(U_n(N)/(\GL_r\times\GL_{n-r}) \to
+  U_n(N)/\GL_n\isom \Gr[N]{n}.\) But these are Zariski--locally trivial with
+  fiber \(\GL_n/(\GL_r\times\GL_{n-r})\) since \(\GL_r\times\GL_{n-r}\) is an
+  admissible subgroup of \(\GL_n\).
 \end{proof}
 
 We note that \(\GL_n/(\GL_r\times\GL_{n-r})\) is equivalent to \(\Gr[n]{r}\) in
-\(\H(k)\). This can be seen as follows. Let \(P\) be the maximal parabolic
-subgroup of \(\GL_n\) containing \(\GL_r\times\GL_{n-r}\). Then \(P\) is
-isomorphic to a semidirect product of \(\GL_r\times\GL_{n-r}\) with a unipotent
-group \(U\). As a scheme, \(U\) is isomorphic to \(\AA^{r(n-r)}\) and therefore
-\(P\simeq \GL_r\times\GL_{n-r}\) in \(\H(k)\). Consequently, the cofiber of the
-inclusion of \(\GL_r\times\GL_{n-r}\) into \(\GL_n\) is \(\AA^1\)--homotopy
-equivalent to the quotient \(\GL_n/P\isom \Gr[n]{r}\).
+\(\H(k)\) and this equivalence is compatible with the respective \(\GL_n\)
+actions. This is shown in \parencite[Lemma~3.1.5]{2015arXiv150708020A} and
+implies in particular that the associated bundle
+\(U_n(\infty)\times^{\GL_n}\Gr[n]{r}\to\Gr{n}\) is equivalent to
+\(\Gr{r}\times\Gr{n-r}\to\Gr{n}\) in \(\H(\Gr{n})\).
 
 \begin{lemma}
-  The morphism \(i_{r,n}\colon\Gr{r}\times\Gr{n-r}\to\Gr{n}\) defines a
-  strongly dualizable object in \(\SH(\Gr{n})\).
+  The morphism \(\overline{i_{r,n}}\colon U_n(\infty)/(\GL_r\times\GL_{n-r})
+  \to\Gr{n}\) defines a strongly dualizable object in \(\Gr{r}\times\Gr{n-r}/\Gr{n}\in\SH(\Gr{n})\).
 \end{lemma}
 \begin{proof}
   By \autoref{lem:ind-dualizability} it will be enough to show that the
-  pullback \(i\colon E\to \Gr[N]{n}\) of \(i_{r,n}\) along the inclusion
+  pullback \(i\colon E\to \Gr[N]{n}\) of \(\overline{i_{r,n}}\) along the inclusion
   \(\Gr[N]{n}\to\Gr{n}\) defines a dualizable object in \(\SH(\Gr[N]{n})\) for
   all \(N\). But, by \autoref{lem:gr-fiber-bundle} the morphism \(i\) is a
   Zariski-locally trivial fiber bundle over \(\Gr[N]{n}\) with fiber
@@ -322,23 +322,55 @@ equivalent to the quotient \(\GL_n/P\isom \Gr[n]{r}\).
 
 \begin{lemma}\label{lem:grassmann-decomp}
   Suppose \(r<n\). The open complement of the closed immersion
-  \(\Gr[n-1]{r}\clim \Gr[n]{r}\) is the total space of a vector bundle of rank
-  \(n-r\) over \(\Gr[n-1]{r-1}\).
+  \(\Gr[n-1]{r}\clim \Gr[n]{r}\) is the total space of an affine space bundle of
+  rank \(n-r\) over \(\Gr[n-1]{r-1}\).
+
+  Dually, the complement of the closed immersion \(\Gr[n-1]{r-1}\clim
+  \Gr[n]{r}\) is the total space of an affine space bundle of rank \(r\) over
+  \(\Gr[n-1]{r}\).
 \end{lemma}
 \begin{proof}
   Let \(A\) be a \(k\)--algebra. On \(\Spec(A)\)--valued points, the inclusion
   \(\Gr[n-1]{r}\clim\Gr[n]{r}\) is given by considering a projective submodule
   \(P\) of \(A^{n-1}\) as a submodule of \(A^n = A^{n-1}\oplus A\). It follows
-  that the complement of \(\Gr[n-1]{r}\) has \(\Spec(A)\)--valued points
+  that the complement \(U\) of \(\Gr[n-1]{r}\) has \(\Spec(A)\)--valued points
   \[
     U(\Spec A) = \{P\subset A^n : \text{\(P\) is projective of rank \(r\) and
       \(P \not\subset A^{n-1}\oplus 0\)}\}.
   \]
-  Given \(P\in U(\Spec A)\), the module \(P\cap (A^{n-1}\oplus 0)\)
-  \viktor{prove this}
+  Given \(P\in U(\Spec A)\), the module \(P\cap (A^{n-1}\oplus 0)\) will be
+  locally free of rank \(r-1\). This gives a map \(\varphi\colon U \to
+  \Gr[n-1]{r-1}\) which is trivial over the standard Zariski--open cover of
+  \(\Gr[n-1]{r-1}\) with fiber \(\AA^{n-r}\).
+
+  The dual statement is proved similarly. In fact, the bundle \(V \to
+  \Gr[n-1]{r}\) in question is the tautological \(r\)-plane bundle on
+  \(\Gr[n-1]{r}\).
 \end{proof}
 
-\begin{proposition}
+The decomposition \(\Gr[n]{r} = U\cup V\) of the last lemma yields a
+homotopy cocartesian square
+\[
+  \begin{tikzcd}
+    \mathllap{U\setminus \Gr[n-1]{r-1} ={}} U\cap V \ar[r] \ar[d] &
+    V\mathrlap{{}\simeq \Gr[n-1]{r}} \ar[d] \\
+    \mathllap{\Gr[n-1]{r-1}\simeq {}}U \ar[r] & \Gr[n]{r}
+  \end{tikzcd}
+\]
+in the \(\AA^1\)--homotopy category \(\H(k)\). It is immediate that this
+decomposition of \(\Gr[n]{r}\) is stable under the action of \(\GL_{n-1}\times
+1\subset \GL_n\). We can therefore pass to the bundles over \(\Gr{n-1}\)
+associated to the universal \(\GL_{n-1}\)--torsor \(U_{n-1}(\infty)\) over
+\(\Gr{n-1}\) and obtain a homotopy cocartesian square
+\[
+  \begin{tikzcd}
+    U_{n-1}(\infty)\times^{\GL_{n-1}} (U\cap V)\ar[r]\ar[d] & \Gr{r}\times\Gr{n-1-r} \ar[d] \\
+    \Gr{r-1}\times\Gr{n-r}\ar[r] & U_{n-1}(\infty)\times^{\GL_{n-1}}\Gr[n]{r}
+  \end{tikzcd}
+\]
+in \(\H(\Gr{n-1})\).
+
+\begin{proposition}\label{prop:transfer-decomp}
   Suppose \(r<n\) and consider the composition
   \[
     \varphi\colon \Gr{n-1,+} \to[\incl] \Gr{n+} \to[{\transfer[n,r]}]\Gr{r+}\smashp\Gr{n-r,+}
@@ -348,71 +380,123 @@ equivalent to the quotient \(\GL_n/P\isom \Gr[n]{r}\).
   \Gr{r-1,+}\smashp\Gr{n-r,+}\) in \(\SH(k)\) such that \(\varphi\) is the sum
   of the compositions
   \begin{align*}
-    \Gr{r-1,+} \to[{\transfer[n,r-1]}]\Gr{r,+}\smashp\Gr{n-1-r,+} \to[\id\smashp\incl]\Gr{r,+}\smashp\Gr{n-r,+} \\
-    \Gr{r-1,+} \to[{\transfer[n-1,r-1]}]\Gr{r-1,+}\smashp\Gr{n-r,+}\to[\incl\smashp\id]\Gr{r,+}\smashp\Gr{n-r,+} \\
+    \Gr{n-1,+} \to[{\transfer[n-1,r]}]\Gr{r,+}\smashp\Gr{n-1-r,+} \to[\id\smashp\incl]\Gr{r,+}\smashp\Gr{n-r,+} \\
+    \Gr{n-1,+} \to[{\transfer[n-1,r-1]}]\Gr{r-1,+}\smashp\Gr{n-r,+}\to[\incl\smashp\id]\Gr{r,+}\smashp\Gr{n-r,+} \\
 \shortintertext{and}
     \Gr{r-1,+}\to[\psi]\Gr{r-1,+}\smashp\Gr{n-r,+} \to[\incl\smashp\id]\Gr{r,+}\smashp\Gr{n-r,+}.
   \end{align*}
 \end{proposition}
 \begin{proof}
-  \viktor{prove this}
+  Consider the homotopy pullback
+  \[
+    \begin{tikzcd}
+      \mathllap{E={}}U_{n-1}(\infty)\times^{\GL_{n-1}}\Gr[n]{r}\ar[d]\ar[r] & \Gr{r}\times\Gr{n-r}\ar[d] \\
+      \Gr{n-1}\ar[r, "\incl"'] & \Gr{n}.
+    \end{tikzcd}
+  \]
+  By the discussion following \autoref{lem:grassmann-decomp} we obtain a cofiber
+  sequence
+  \[
+    X/\Gr{n-1} \to (\Gr{r}\times\Gr{n-1-r})/\Gr{n-1}\vee(\Gr{r-1}\times\Gr{n-r})/\Gr{n-1} \to
+    E/\Gr{n-1}
+  \]
+  in \(\SH(\Gr{n-1})\) where \(X = U_{n-1}(\infty)\times^{\GL_{n-1}}(U\cap V)\).
+  \Autoref{thm:transfer-additivity} then shows that
+  \[
+    \transfer[E/\Gr{n-1}] = \transfer[\Gr{r}\times\Gr{n-1-r}/\Gr{n-1}] +
+    \transfer[\Gr{r-1}\times\Gr{n-r}/\Gr{n-1}] - \transfer[X/\Gr{n-1}]
+  \]
+  in \(\SH(\Gr{n-1})\). Passing to the absolute transfer and using
+  \autoref{lem:transfer-natural} yields that \(\varphi\) is the sum of
+  the compositions
+  \begin{align*}
+    &\Gr{n-1,+} \to[{\transfer[n-1,r]}] \Gr{r,+}\smashp\Gr{n-1-r,+} \to[\id\smashp\incl]\Gr{r,+}\smashp\Gr{n-r,+} \\
+    &\Gr{n-1,+} \to[{\transfer[n-1,r-1]}] \Gr{r-1,+}\smashp\Gr{n-r,+} \to[\incl\smashp\id]\Gr{r,+}\smashp\Gr{n-r,+} \\
+\shortintertext{and}
+    &\Gr{n-1,+}\to X_+ \to \Gr{r,+}\smashp\Gr{n-r,+}
+  \end{align*}
+  in \(\SH(k)\). Here, the map \(X_+\to\Gr{r,+}\smashp\Gr{n-r,+}\) is obtained
+  from the inclusion \(U\cap V\subset \Gr[n]{r}\) by passing to associated
+  bundles. Now, this inclusion factors through the inclusion of \(U\) into
+  \(\Gr[n]{r}\). By \autoref{lem:grassmann-decomp} the inclusion
+  \(\Gr[n-1]{r-1}\subset U\) is an \(\AA^1\)--equivalence, being the zero
+  section of an affine space bundle. Therefore
+  \(X_+\to\Gr{r,+}\smashp\Gr{n-r,+}\) factors through the map
+  \(\incl\smashp\id\colon\Gr{r-1,+}\smashp\Gr{n-r,+}\to\Gr{r,+}\smashp\Gr{n-r,+}\).
+  This way we obtain the map \(\psi\) and the required decomposition of \(\transfer[n,r]\circ\incl\).
 \end{proof}
 
 \section{Proof of the Theorem}
 
-The inclusions \(\GL_i\to\GL_n\) induce a filtration
+The inclusions \(\GL_i\times 1\subset\GL_n\) induce a filtration
 \[
     \BGL_{0,+}\to[i_1] \BGL_{1,+} \to[i_2] \dots \to[i_n] \BGL_{n,+} \to
     \dots\to[i_m] \BGL_{m,+}.
 \]
-For \(k \leq n\) the block--diagonal inclusion \(i_{k,n}\colon\BGL_k\times\BGL_{n-k}\to \BGL_n\) has
-homotopy fibers \(\GL_n/(\GL_k\times\GL_{n-k})\). This homogeneous space is
-\(\AA^1\)--homotopy equivalent to the Grassmannian \(\Gr[n]{k}\) of \(k\)--planes
-in \(n\)--space which is smooth and proper. Consequently, \(i_{k,n}\) admits a
-Becker--Gottlieb transfer \(\transfer[n,k]\colon\BGL_{n,+}\to \BGL_{k,+}\smashp
-\BGL_{n-k,+}\). Write \(f_{n,k}\colon \BGL_{n,+}\to \BGL_{k,+}\) for the
-composition
+We have seen that for \(r \leq n\) the block--diagonal inclusion
+\(i_{r,n}\colon\BGL_r\times\BGL_{n-r}\to \BGL_n\) admits an absolute transfer
+\(\transfer[n,r]\colon\BGL_{n,+}\to \BGL_{r,+}\smashp \BGL_{n-r,+}\) in the
+motivic stable homotopy category \(\SH(k)\). Write \(f_{n,r}\colon \BGL_{n,+}\to
+\BGL_{r,+}\) for the composition
 \[
-  \BGL_{n,+} \to[{\transfer[n,k]}] \BGL_{k,+}\smashp\BGL_{n-k,+} \to[\proj] \BGL_{k,+}
+  \BGL_{n,+} \to[{\transfer[n,r]}] \BGL_{r,+}\smashp\BGL_{n-r,+} \to[\proj] \BGL_{r,+}
 \]
-and \(\phi_{n,k}\) for the composition
+and \(\phi_{n,r}\) for the composition
 \[
-  \BGL_{n,+}\to[f_{n,k}] \BGL_{k,+}\to\BGL_k/{\BGL_{k-1}}.
+  \BGL_{n,+}\to[f_{n,r}] \BGL_{r,+}\to\BGL_r/{\BGL_{r-1}}.
 \]
 
 \begin{lemma}\label{lem:phi-comp}
-  With notation as above, for \(k < n\) the compositions
+  With notation as above, for \(r < n\) the compositions
 \[
-  \BGL_{n-1,+} \to[i_n] \BGL_{n,+} \to[f_{n,k}] \BGL_{k,+} \to \BGL_k/{\BGL_{k-1}}
+  \BGL_{n-1,+} \to[i_n] \BGL_{n,+} \to[f_{n,r}] \BGL_{r,+} \to \BGL_r/{\BGL_{r-1}}
 \]
 and
 \[
-  \BGL_{n-1,+} \to[f_{n-1,k}] \BGL_{k,+} \to \BGL_k/{\BGL_{k-1}}
+  \BGL_{n-1,+} \to[f_{n-1,r}] \BGL_{r,+} \to \BGL_r/{\BGL_{r-1}}
 \]
 coincide.
 \end{lemma}
+\begin{proof}
+  By \autoref{prop:transfer-decomp} the composition \(f_{n,r}\circ i_n\) is a
+  sum of two compositions
+  \begin{align*}
+    &\BGL_{n-1,+} \to[{\transfer[n-1,r]}] \BGL_{r,+}\smashp\BGL_{n-1-r,+} \to[\id\smashp\incl]\BGL_{r,+}\smashp\BGL_{n-r,+}\to[\proj]\BGL_{r,+} \\
+    \shortintertext{and}
+    &\BGL_{n-1,+}\to\BGL_{r-1,+}\smashp\BGL_{n-r,+}\to[\incl\smashp\id]\BGL_{r,+}\smashp\BGL_{n-r,+}\to[\proj]\BGL_{r,+}
+  \end{align*}
+  in \(\SH(k)\). But the composition
+  \[
+    \BGL_{r-1,+}\to[\incl]\BGL_{r,+} \to \BGL_r/{\BGL_{r-1}}
+  \]
+  vanishes. Therefore, \(f_{n,r}\circ i_n\) coincides with the composition
+  \[
+    \BGL_{n-1,+}\to[f_{n-1,r}]\BGL_{r,+}\to\BGL_r/{\BGL_{r-1}}
+  \]
+  in \(\SH(k)\).
+\end{proof}
 
 \begin{proof}[{Proof of \autoref{thm:main}}]
   Proceeding by induction on \(n\), assume that
 \[
-  \Phi = \bigvee_{k=0}^{n-1} \phi_{n-1,k}\colon \BGL_{n-1,+} \to \bigvee_{k=0}^{n-1} \BGL_k/{\BGL_{k-1}}
+  \Phi = \bigvee_{r=0}^{n-1} \phi_{n-1,r}\colon \BGL_{n-1,+} \to \bigvee_{r=0}^{n-1} \BGL_r/{\BGL_{r-1}}
 \]
 is a \(\PP^1\)--stable equivalence. Because of \autoref{lem:phi-comp} we have a
 commutative diagram
 \[
   \begin{tikzcd}
     {} & \BGL_{n,+}\ar[dr, "\Phi'"] & {} \\
-    \BGL_{n-1,+} \ar[rr, "\Phi"'] \ar[ur, "i_n"] & {} & \displaystyle\bigvee_{k=0}^{n-1}\BGL_k/{\BGL_{k-1}}
+    \BGL_{n-1,+} \ar[rr, "\Phi"'] \ar[ur, "i_n"] & {} & \displaystyle\bigvee_{r=0}^{n-1}\BGL_r/{\BGL_{r-1}}
   \end{tikzcd}
 \]
-where \(\Phi' = \bigvee_{k=0}^{n-1}\phi_{n,k}\). It follows that \(\Phi^{-1}\circ\Phi'\circ i_n \simeq \id\),
+where \(\Phi' = \bigvee_{r=0}^{n-1}\phi_{n,r}\). It follows that \(\Phi^{-1}\circ\Phi'\circ i_n \simeq \id\),
 \ie~\(i_n\) admits a left inverse. This implies that we have a \(\PP^1\)--stable equivalence
 \[
   \BGL_{n,+} \to[{(\Phi^{-1}\Phi') \vee \phi_{n,n}}] \BGL_{n-1,+} \vee \BGL_n/{\BGL_{n-1}}
 \]
 since \(\phi_{n,n}\) is by definition the canonical projection. Post-composing
 with \(\Phi\vee{\id}\) then shows that the stable map \(\Phi'\vee\phi_{n,n}\colon
-\BGL_{n,+}\to\bigvee_{k=0}^n \BGL_k/{\BGL_{k-1}}\) is a \(\PP^1\)--stable
+\BGL_{n,+}\to\bigvee_{r=0}^n \BGL_r/{\BGL_{r-1}}\) is a \(\PP^1\)--stable
 equivalence as well.
 \end{proof}
 
