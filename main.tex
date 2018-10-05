@@ -15,26 +15,15 @@
 \section{Introduction}
 
 \begin{theorem}\label{thm:main}
-  Over a field \(k\), there is a \(\PP^1\)--stable splitting \(\Tsusp
-  \BGL_{n,+} \simeq \bigvee_{i=0}^{n-1} \Tsusp \MGL_j\).
+  Over a field \(k\), there is a \(\PP^1\)--stable splitting \(\BGL_{m,+} \simeq
+  \bigvee_{i=1}^{m} \BGL_i/\BGL_{i-1}\).
 \end{theorem}
 
 \section{Stable Motivic Homotopy Theory of Smooth Ind-Schemes}
-An ind-scheme over \(S\) is an object of \(\Ind(\Sm{S})\), the \infcat of
+A smooth ind-scheme over \(S\) is an object of \(\Ind(\Sm{S})\), the \infcat of
 ind-objects in the category of smooth schemes over \(S\) with arbitrary
-morphisms between them.
-
-\(\SH\) has some six operations-like behaviour when you plug in smooth
-ind-schemes \(X = \colim_i X_i\):
-\[
-  \SH(X) \coloneqq \lim_i \SH(X_i)
-\]
-along pullbacks; \(\SH(X) \simeq \colim_i \SH(X_i)\) along pushforwards in the
-\infcat of presentable \infcats.\viktor{reference; this is presentable \infcat
-  yoga in lurie 5.5.3, isn't it?}
-\viktor{monoidal structure and dualizability is done in HA 4.6.1.11, 4.8.2.18, 3.4.3}
-
-\viktor{formulate a proposition for the ind-scheme stuff}
+morphisms between them. A morphism of ind-schemes is smooth if it can be presented
+as a colimit of smooth morphisms in \(\Sm{S}\).
 
 For every morphism \(f\colon X\to Y\) between smooth schemes over \(S\) we have
 an adjunction
@@ -62,7 +51,10 @@ over \(S\) and \(X = \colim_i X_i\) as an ind-scheme over \(S\), then
 \]
 Note that \(\SH^*(X)\) and \(\SH_*(X)\) are equivalent \infcats since limits
 along left adjoints in \(\PrL\) correspond to colimits along their right
-adjoints in \(\PrR\), see \parencite[section~5.5.3]{mr2522659}.
+adjoints in \(\PrR\), see \parencite[section~5.5.3]{mr2522659}. This description
+of \(\SH(X)\) also shows that it inherits the structure of a closed symmetric
+monoidal, stable, presentable \infcat, see \parencite[section~3.4.3,
+Proposition~4.8.2.18]{higheralgebra}.
 
 The adjunction \(f^*\dashv f_*\) for a morphism \(f\colon X\to Y\) of ind-schemes is obtained
 by presenting \(f\) as a colimit of maps \(f_i\colon X_i\to Y_i\) between
@@ -72,17 +64,34 @@ and \(f_*\) the functor induced on the colimits in \(\PrR\).
 It remains to construct the extra left-adjoint \(f_\#\) for a smooth map \(f\)
 between ind-schemes over \(S\). First, a morphism \(f\colon X\to Y\) between
 ind-schemes is smooth if and only if it is a filtered colimit of smooth maps
-\(f_i\colon X_i \to Y_i\)\viktor{this is a definition, isn't it?}. Each
-\(f_i^*\) admits a left adjoint \(f_{i\#}\) and since \(\PrR\) is stable under
-limits, the functor \(f^*\colon \SH^*(Y)\to\SH^*(X)\) admits a left adjoint as
-well. That is to say, \(\SH^*\colon\Ind(\Sm{S})^\Op\to\PrL\) restricts to a
-functor \(\SH^*\colon\Ind(\Sm{S})_{\sm}^\Op \to \PrR\) from the wide subcategory
-of \(\Ind(\Sm{S})\) consisting of smooth maps between smooth ind-schemes over
+\(f_i\colon X_i \to Y_i\). Each \(f_i^*\) admits a left adjoint \(f_{i\#}\) and
+since \(\PrR\) is stable under limits, the functor \(f^*\colon
+\SH^*(Y)\to\SH^*(X)\) admits a left adjoint as well. That is to say,
+\(\SH^*\colon\Ind(\Sm{S})^\Op\to\PrL\) restricts to a functor
+\(\SH^*\colon\Ind(\Sm{S})_{\sm}^\Op \to \PrR\) from the wide subcategory of
+\(\Ind(\Sm{S})\) consisting of smooth maps between smooth ind-schemes over
 \(S\). Composing with the equivalence \(\PrL\simeq (\PrR)^\Op\) then yields the
 functor
 \[
   \SH_\#\colon\Ind(\Sm{S})_\sm\to\PrL.
 \]
+In summary, we have the following proposition.
+\begin{proposition}
+  For every ind-scheme \(X\) over \(S\), there is a closed symmetric monoidal,
+  stable, presentable \infcat \(\SH(X)\). For every morphism \(f\colon X\to Y\)
+  between ind-schemes there is an associated adjunction
+  \[
+    \adjunction{f^*}{\SH(Y)}{\SH(X)}{f_*}
+  \]
+  with \(f^*\) a monoidal functor. If \(f\) is smooth then there is an
+  additional adjunction
+  \[
+    \adjunction{f_\#}{\SH(X)}{\SH(Y)}{f^*}.
+  \]
+  These data are functorial in \(f\) and admit various natural exchange
+  transformations. If \(X\) happens to be a smooth scheme over \(S\) then this
+  version of \(\SH(X)\) is naturally equivalent to the usual construction.
+\end{proposition}
 
 Following \parencite{arxiv180610108L}, for a smooth morphism \(f\colon X\to Y\)
 of ind-schemes over \(S\) we define \(X/Y = f_\#(\one{X})\in\SH(Y)\) where
@@ -128,12 +137,12 @@ construction \(\pi_\#(\one{X})\) for a smooth ind-scheme \(\pi\colon X\to S\).
     \dual{X}\otimes X\to[\id\otimes\Delta] \dual{X}\otimes X\otimes
     C\to[\eval\otimes\id] \one{}\otimes C\wequiv C.
   \]
-  If there can be no risk of confusion we sometimes write \(\transfer[X] = \transfer[X,\Delta]\).
+  If there can be no risk of confusion we write \(\transfer[X] = \transfer[X,\Delta]\).
 \end{definition}
 
 \begin{theorem}[{\parencite[Theorem~1.9]{MR1867203}}]\label{thm:transfer-additivity}
   Let \(\cal C\) be a symmetric monoidal stable \infcat and let \(X\to Y\to Z\)
-  be a cofiber sequence in \(\cal C\). Assume that \(C\in\cal C\) is such that
+  be a cofiber sequence in \(\cal C\). Assume \(C\in\cal C\) is such that
   \(\_{\otimes}C\) preserves cofiber sequences. Suppose that \(Y\) is equipped
   with a map \(\Delta_Y\colon Y\to Y\otimes C\) and that \(X\) and \(Y\) are
   strongly dualizable. Then \(Z\) is strongly dualizable and there are maps
@@ -253,11 +262,13 @@ taking quotients yields a morphism
 \[
   i_{r,n}\colon\Gr{r}\times\Gr{n-r} \to \Gr{n}.
 \]
-The goal of this section is to develop a partial inductive description of the
-absolute transfer \(\transfer[n,r]\colon
-\BGL_{n,+}\to\BGL_{r,+}\smashp\BGL_{n-r,+}\) of \(i_{r,n}\) in \(\SH(k)\). For
-this purpose a slightly different version of \(i_{r,n}\) in \(\H(k)\) will
-be more convenient.
+This morphism is equivalent in \(\H(k)\) to the map
+\(\BGL_r\times\BGL_{n-r}\to\BGL_n\) induced by the block diagonal inclusion
+\(\GL_r\times\GL_{n-r}\subset \GL_n\). The goal of this section is to develop a
+partial inductive description of the absolute transfer \(\transfer[n,r]\colon
+\Gr{n,+}\to\Gr{r,+}\smashp\Gr{n-r,+}\) of \(i_{r,n}\) in \(\SH(k)\). For this
+purpose a slightly different version of \(i_{r,n}\) in \(\H(k)\) will be more
+convenient.
 
 \begin{lemma}
   In \(\H(k)\) there is an equivalence \(\Gr{r}\times\Gr{n-r}\to
@@ -288,21 +299,21 @@ be more convenient.
 \begin{proof}
   By construction, the morphism \(\overline{i_{r,n}}\) is isomorphic to the
   colimit of the quotient maps \(U_n(N)/(\GL_r\times\GL_{n-r}) \to
-  U_n(N)/\GL_n\isom \Gr[N]{n}.\) But these are Zariski--locally trivial with
-  fiber \(\GL_n/(\GL_r\times\GL_{n-r})\) since \(\GL_r\times\GL_{n-r}\) is an
-  admissible subgroup of \(\GL_n\).
+  U_n(N)/\GL_n\isom \Gr[N]{n}.\) But these are all Zariski--locally trivial with
+  fiber \(\GL_n/(\GL_r\times\GL_{n-r})\).
 \end{proof}
 
 We note that \(\GL_n/(\GL_r\times\GL_{n-r})\) is equivalent to \(\Gr[n]{r}\) in
 \(\H(k)\) and this equivalence is compatible with the respective \(\GL_n\)
 actions. This is shown in \parencite[Lemma~3.1.5]{2015arXiv150708020A} and
 implies in particular that the associated bundle
-\(U_n(\infty)\times^{\GL_n}\Gr[n]{r}\to\Gr{n}\) is equivalent to
-\(\Gr{r}\times\Gr{n-r}\to\Gr{n}\) in \(\H(\Gr{n})\).
+\(U_n(\infty)\times^{\GL_n}\Gr[n]{r}\to\Gr{n}\) is equivalent to the quotient
+\(U_n(\infty)/(\GL_r\times\GL_{n-r})\to\Gr{n}\) in \(\H(\Gr{n})\).
 
 \begin{lemma}
   The morphism \(\overline{i_{r,n}}\colon U_n(\infty)/(\GL_r\times\GL_{n-r})
-  \to\Gr{n}\) defines a strongly dualizable object in \(\Gr{r}\times\Gr{n-r}/\Gr{n}\in\SH(\Gr{n})\).
+  \to\Gr{n}\) defines a strongly dualizable object
+  \(G_{r,n}\in\SH(\Gr{n})\).\viktor{change this notation}
 \end{lemma}
 \begin{proof}
   By \autoref{lem:ind-dualizability} it will be enough to show that the
@@ -364,8 +375,8 @@ associated to the universal \(\GL_{n-1}\)--torsor \(U_{n-1}(\infty)\) over
 \(\Gr{n-1}\) and obtain a homotopy cocartesian square
 \[
   \begin{tikzcd}
-    U_{n-1}(\infty)\times^{\GL_{n-1}} (U\cap V)\ar[r]\ar[d] & \Gr{r}\times\Gr{n-1-r} \ar[d] \\
-    \Gr{r-1}\times\Gr{n-r}\ar[r] & U_{n-1}(\infty)\times^{\GL_{n-1}}\Gr[n]{r}
+    (U_{n-1}(\infty)\times^{\GL_{n-1}} (U\cap V))/\Gr{n-1}\ar[r]\ar[d] & G_{r,n-1}\ar[d] \\
+    G_{r-1,n-1}\ar[r] & (U_{n-1}(\infty)\times^{\GL_{n-1}}\Gr[n]{r})/\Gr{n-1}
   \end{tikzcd}
 \]
 in \(\H(\Gr{n-1})\).
@@ -391,20 +402,18 @@ in \(\H(\Gr{n-1})\).
   \[
     \begin{tikzcd}
       \mathllap{E={}}U_{n-1}(\infty)\times^{\GL_{n-1}}\Gr[n]{r}\ar[d]\ar[r] & \Gr{r}\times\Gr{n-r}\ar[d] \\
-      \Gr{n-1}\ar[r, "\incl"'] & \Gr{n}.
+      \Gr{n-1}\ar[r, "\incl"'] & \Gr{n}
     \end{tikzcd}
   \]
-  By the discussion following \autoref{lem:grassmann-decomp} we obtain a cofiber
-  sequence
+  in \(\H(k)\). By the discussion following \autoref{lem:grassmann-decomp} we
+  obtain a cofiber sequence
   \[
-    X/\Gr{n-1} \to (\Gr{r}\times\Gr{n-1-r})/\Gr{n-1}\vee(\Gr{r-1}\times\Gr{n-r})/\Gr{n-1} \to
-    E/\Gr{n-1}
+    X/\Gr{n-1} \to G_{r,n-1}\vee G_{r-1,n-1} \to E/\Gr{n-1}
   \]
   in \(\SH(\Gr{n-1})\) where \(X = U_{n-1}(\infty)\times^{\GL_{n-1}}(U\cap V)\).
   \Autoref{thm:transfer-additivity} then shows that
   \[
-    \transfer[E/\Gr{n-1}] = \transfer[\Gr{r}\times\Gr{n-1-r}/\Gr{n-1}] +
-    \transfer[\Gr{r-1}\times\Gr{n-r}/\Gr{n-1}] - \transfer[X/\Gr{n-1}]
+    \transfer[E/\Gr{n-1}] = \transfer[G_{r,n-1}] + \transfer[G_{r-1,n-1}] - \transfer[X/\Gr{n-1}]
   \]
   in \(\SH(\Gr{n-1})\). Passing to the absolute transfer and using
   \autoref{lem:transfer-natural} yields that \(\varphi\) is the sum of
@@ -428,7 +437,7 @@ in \(\H(\Gr{n-1})\).
 
 \section{Proof of the Theorem}
 
-The inclusions \(\GL_i\times 1\subset\GL_n\) induce a filtration
+The inclusions \(\GL_i\times 1\subset\GL_m\) induce a filtration
 \[
     \BGL_{0,+}\to[i_1] \BGL_{1,+} \to[i_2] \dots \to[i_n] \BGL_{n,+} \to
     \dots\to[i_m] \BGL_{m,+}.
