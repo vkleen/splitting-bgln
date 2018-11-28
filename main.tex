@@ -4,6 +4,8 @@
 
 \usepackage{subfiles}
 
+\RedeclareSectionCommand[counterwithin=section,font={\normalsize\normalfont\scshape}]{paragraph}
+
 \begin{document}
 \title{A Motivic Snaith Decomposition} \date{}
 \author{Viktor Kleen}
@@ -15,12 +17,23 @@
 
 \section{Introduction}
 
+Snaith \parencite{MR539791,MR517089} described splittings of the natural filtrations on \(\BGL_{n}(\CC)\) and \(\BGL_{n}(\HH)\) in the classical stable homotopy category, using Becker--Gottlieb transfer associated with the normalizer of a maximal torus in \(\GL_{n}\).
+He also obtained coarser results for \(\BGL_{n}(\RR)\) and for finite fields.
+Using transfers associated with the block-diagonal subgroup \(\GL_{i}\times\GL_{n-i}\subset\GL_{n}\), \textcite{MR1000386} recovered Snaith's results on \(\BGL_{n}(\CC)\) and \(\BGL_{n}(\HH)\) and improve the ones on \(\BGL_{n}(\RR)\) and \(\BGL_{n}(\FF_{q})\).
+In fact, the applicability of this approach to the case of \(\BGL_{n}(\CC)\) was first noted by Richter.
+
+In this paper, we prove an analogue of Snaith's, Mitchell and Priddy's and Richter's result in the motivic stable homotopy category of an arbitrary base scheme \(S\):
 \begin{theorem}\label{thm:main}
-  Over a field \(k\), there is a \(\PP^1\)--stable splitting \(\BGL_{m,+} \wequiv
-  \bigvee_{i=1}^{m} \BGL_i/\BGL_{i-1}\).
+  Over any scheme \(S\), there is a \(\PP^1_{S}\)--stable splitting \(\BGL_{m,+} \wequiv \bigvee_{i=1}^{m} \BGL_i/\BGL_{i-1}\) of the natural filtration \(\BGL_{0}\subset\dots\subset\BGL_{m-1}\subset\BGL_{m}\).
 \end{theorem}
 
-\subsection*{Notation}
+Using topological realization, for \(S = \Spec(\CC)\) or \(S = \Spec(\RR)\), this recovers the classical story.
+Our approach mirrors the technique of \textcite{MR1000386}, utilizing Becker--Gottlieb transfers associated with the block-diagonal inclusion \(\BGL_{i}\times\BGL_{n-i}\to\BGL_{n}\).
+We make essential use of the six operations approach to the motivic Becker--Gottlieb transfer introduced by \textcite{arxiv180610108L}.
+
+\paragraph*{Overview}
+
+\paragraph*{Notation}
 In what follows \(S\) will be an arbitrary base scheme. For a scheme \(X\) we
 write \(\H(X)\) for the \infcat of presheaves of spaces on \(\Sm{X}\) localized
 at Nisnevich-local equivalences and projections \(Y\times\AA^1\to Y\). It is a
@@ -287,7 +300,7 @@ in \(\SH(B)\). We have the following formulation of motivic Atiyah duality.
 
 Because the property of being strongly dualizable is formulated in the homotopy
 category, it is immediate that any smooth scheme \(Y\to X\) such that \(Y/X\) is
-\(\AA^1\)-homotopy equivalence to a smooth and proper scheme over \(X\) defines
+\(\AA^1\)-homotopy equivalent to a smooth and proper scheme over \(X\) defines
 a strongly dualizable object in \(\SH(X)\). Furthermore, dualizability is local
 in the following sense.
 
@@ -309,7 +322,7 @@ in the following sense.
   \(\Gr[n]{r}\clim\Gr[n+1]{r}\).
 \end{definition}
 
-It is well that known \(\Gr{r}\) is a model of \(\BGL_r\) in the
+It is well known that \(\Gr{r}\) is a model for \(\BGL_r\) in the
 \(\AA^1\)--homotopy category. In fact, let \(U_r(N)\) be the scheme of
 monomorphisms \(\cal O^r \to \cal O^N\). Along \(\cal O^N\oplus 0 \subset \cal
 O^{N+1}\), there are closed embeddings \(U_r(N)\clim U_r(N+1)\) and

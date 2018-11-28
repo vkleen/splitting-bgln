@@ -22,3 +22,4 @@ auto
 *.pdf
 *.synctex.gz
 build/
+.auctex-auto
