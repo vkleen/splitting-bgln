@@ -11,6 +11,13 @@
 \author{Viktor Kleen}
 \maketitle
 
+\begin{abstract}
+  \noindent{\normalsize\normalfont\scshape Abstract}\hskip1em
+  The filtration \(\BGL_{0}\subset\dots\subset\BGL_{n-1}\subset\BGL_{n}\) is split by motivic Becker--Gottlieb transfers in the motivic stable homotopy category over any scheme.
+  This recovers results by Snaith on the splitting of \(\BGL_{n}(\CC)\) in classical stable homotopy theory by passing to complex realizations.
+  On the way, we extend motivic homotopy theory to smooth ind-schemes as bases and show how to construct the necessary fragment of the six operations and duality for this extension.
+\end{abstract}
+
 {\footnotesize
   \tableofcontents
 }
@@ -29,9 +36,18 @@ In this paper, we prove an analogue of Snaith's, Mitchell and Priddy's and Richt
 
 Using topological realization, for \(S = \Spec(\CC)\) or \(S = \Spec(\RR)\), this recovers the classical story.
 Our approach mirrors the technique of \textcite{MR1000386}, utilizing Becker--Gottlieb transfers associated with the block-diagonal inclusion \(\BGL_{i}\times\BGL_{n-i}\to\BGL_{n}\).
-We make essential use of the six operations approach to the motivic Becker--Gottlieb transfer introduced by \textcite{arxiv180610108L}.
+We make essential use of the six operations approach to the motivic Becker--Gottlieb transfer introduced by \textcite{MR3302973}.
+The main technical difficulty in our approach to the splitting of \(\BGL_{n,+}\) is the fact that \(\BGL_{n}\) is not representable by a scheme.
+However, it is representable by a smooth ind-scheme.
 
 \paragraph*{Overview}
+To obtain a transfer for the inclusion \(\BGL_{i}\times\BGL_{n-i}\to\BGL_{n}\) we use an explicit model of \(\BGL_{n}\) as the infinite Grassmannian \(\Gr{n}\).
+We give an explicit presentation of the inclusion \(\BGL_{i}\times\BGL_{n-i}\to\BGL_{n}\) as a smooth Zariski--locally trivial bundle \(U\to\Gr{n}\) over the ind-scheme \(\Gr{n}\).
+Then we construct a symmetric monoidal presentable stable \infcat \(\SH(\Gr{n})\) which accepts a functor from smooth ind-schemes over \(\Gr{n}\) and supports a functor \(\SH(\Gr{n})\to\SH(S)\).
+The motivic Becker--Gottlieb transfer of \(U\to\Gr{n}\) is then defined to be the image in \(\SH(S)\) of the monoidal trace of \(U\) in \(\SH(\Gr{n})\).
+We appeal to a result of \textcite{MR1867203} to see that this construction of Becker--Gottlieb transfers has a Mayer--Vietoris property.
+This enables us to show that, just like in classical topology, the transfers of the inclusions \(\BGL_{i}\times\BGL_{n-i}\subset\BGL_{n}\) can be used to split the natural filtration on \(\BGL_{n}\).
+Since the transfer is a stable phenomenon, this splitting is naturally only found in the stable motivic world.
 
 \paragraph*{Notation}
 In what follows \(S\) will be an arbitrary base scheme. For a scheme \(X\) we
